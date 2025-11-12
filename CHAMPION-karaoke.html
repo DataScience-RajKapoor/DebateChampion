@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CHAMPION Karaoke</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{--dark:#121212;--light:#ffffff;--accent:#FFD600;}
+  body{margin:0;font-family:'Inter',sans-serif;background:var(--dark);color:var(--light);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:2rem;box-sizing:border-box;}
+  h1{font-size:clamp(2rem,5vw,3.5rem);margin:0 0 1rem;font-weight:900;}
+  .controls{margin-bottom:2rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
+  button{background:var(--accent);color:var(--dark);border:none;border-radius:.4em;padding:.6em 1.2em;font-weight:700;font-size:1rem;cursor:pointer;transition:.3s;}
+  button:hover{transform:scale(1.05);}
+  #lyrics{max-width:50rem;font-size:clamp(1.2rem,3vw,2rem);font-weight:700;line-height:1.4;}
+  .line{padding:.3em 0;transition:color .3s,transform .3s;}
+  .line.active{color:var(--accent);transform:scale(1.05);}
+  audio{width:100%;max-width:30rem;margin-bottom:1.5rem;}
+</style>
+</head>
+<body>
+
+<h1>CHAMPION Karaoke</h1>
+
+<audio id="track" controls>
+  <source src="Champion Debating.mp3" type="audio/mpeg">
+  Your browser does not support MP3.
+</audio>
+
+<div class="controls">
+  <button onclick="toggleVersion()">Switch to Long Lyrics</button>
+  <button onclick="restart()">Restart & Sync</button>
+</div>
+
+<div id="lyrics"></div>
+
+<script>
+/* ==========  LYRICS DATA  ========== */
+const shortLines = [
+  "Connect with the judge – nose is the key!",
+  "Hear the echo, steal their word instantly.",
+  "Ask an arrow question – hit the target, see?",
+  "Music in your voice makes partners invent free.",
+  "Pass the note, point the proof – perfect play, we agree.",
+  "Invent a save, outline the roadmap – order it nicely.",
+  "Nice-face wins – that’s CHAMPION, literally!"
+];
+
+const longLines = [
+  "Connect with the judge — don’t stare at others or the floor,",
+  "Speak to them, not at your notes — let your message soar!",
+  "Every 30 seconds — eye contact, please!",
+  "It says: “I’m with you, judge,” and builds expertise.",
+  "And when their focus starts to fade away,",
+  "Say: “So Judge…” — it brings them back your way!",
+
+  "Hear the opponent echo, steal their phrase with might,",
+  "Write their question down — then answer it tight.",
+  "And if you’re not sure? Say this with precision:",
+  "“Based on our team’s position.”",
+
+  "Ask the arrow question — sharp and lean,",
+  "No rambling detours — just keep it clean.",
+  "Use cross-x smart — it’s your hidden machine,",
+  "Point it at gaps — make your logic seen",
+
+  "Music in your voice — let it rise and fall,",
+  "Hold your paper chest-high — not a face-blocking wall.",
+  "Pause… after… points… that matter the most,",
+  "It gives time to think — and lets your words boast.",
+
+  "Pass the sticky note, whisper the proof — smooth team play,",
+  "Support your partner, don’t drift away.",
+  "Nod when they speak, keep your rhythm tight,",
+  "Two voices, one mind — you’ll win that fight.",
+
+  "Invent a save — when things go south,",
+  "Don’t freeze — let smart words leave your mouth.",
+  "Say: “They said… but here’s why we still lead…”",
+  "Or “I hear that… but here’s what we need.”",
+  "Make notes as they talk — reframe with grace,",
+  "Turn pressure into your winning case!",
+
+  "Outline your close — don’t leave it to chance,",
+  "Say: “Judge, three things…” — then give them a stance.",
+  "Be clear, be clean — your final lines,",
+  "Should echo like bells or courtroom chimes.",
+  "Wrap it with heart — confident and just,",
+  "“That is why, Judge, you should side with us.”",
+
+  "Nice face wins — so let your warmth shine,",
+  "A calm, kind tone makes your logic divine.",
+  "Don’t snarl, don’t glare — even when you’re right,",
+  "Charm wins rounds — more than a fight.",
+
+  "That’s CHAMPION — literally!",
+  "Convince the judge, speak fearlessly.",
+  "Respect, rhythm, and unity —",
+  "That’s debate done brilliantly."
+];
+
+let currentLines = shortLines;
+let currentIndex = 0;
+const audio = document.getElementById('track');
+const lyricsDiv = document.getElementById('lyrics');
+
+/* ==========  BUILD LYRICS  ========== */
+function buildLines(lines){
+  lyricsDiv.innerHTML = '';
+  lines.forEach((line,i)=>{
+    const div = document.createElement('div');
+    div.className = 'line';
+    div.textContent = line;
+    div.id = `line-${i}`;
+    lyricsDiv.appendChild(div);
+  });
+}
+
+/* ==========  SYNC  ========== */
+audio.addEventListener('timeupdate',()=>{
+  const pct = audio.currentTime / audio.duration;
+  if (!audio.duration) return;
+  const index = Math.floor(pct * currentLines.length);
+  if (index !== currentIndex && index >= 0 && index < currentLines.length){
+    document.querySelectorAll('.line').forEach(l=>l.classList.remove('active'));
+    document.getElementById(`line-${index}`).classList.add('active');
+    currentIndex = index;
+  }
+});
+
+/* ==========  BUTTONS  ========== */
+function toggleVersion(){
+  const btn = event.target;
+  currentLines = (currentLines === shortLines) ? longLines : shortLines;
+  btn.textContent = (currentLines === shortLines) ? 'Switch to Long Lyrics' : 'Switch to Short Lyrics';
+  buildLines(currentLines);
+  restart();
+}
+
+function restart(){
+  audio.currentTime = 0;
+  audio.play();
+  currentIndex = 0;
+  document.querySelectorAll('.line').forEach(l=>l.classList.remove('active'));
+}
+
+/* ==========  INIT  ========== */
+buildLines(currentLines);
+</script>
+</body>
+</html>
