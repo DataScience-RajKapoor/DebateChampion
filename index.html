@@ -2,145 +2,476 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Debate CHAMPION – Rhyme</title>
+<title>Debate CHAMPION – Rhyme & Slides</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --c:#FFD600; --h:#00E676; --a:#FF3D00; --m:#2979FF; --p:#D500F9; --i:#00E5FF; --o:#FF9100; --n:#64DD17;
-    --dark:#121212; --light:#ffffff;
-  }
-  html{scroll-behavior:smooth;}
-  body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--dark);color:var(--light);}
-  /* ----------  CHAMPION BAR  ---------- */
-  .champion-bar{
-    position:fixed;top:0;left:0;right:0;display:flex;justify-content:center;align-items:center;
-    padding:.6rem 0;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);z-index:20;
-    font-weight:900;font-size:clamp(1.8rem,5vw,3.2rem);letter-spacing:.1em;
-  }
-  .champion-bar a{
-    text-decoration:none;padding:0 .2em;border-radius:.2em;margin:0 .05em;transition:.3s;
-  }
-  .champion-bar a:hover{transform:scale(1.15) rotate(-3deg);}
-  .c{ background:var(--c); color:var(--dark); }
-  .h{ background:var(--h); color:var(--dark); }
-  .a{ background:var(--a); color:var(--light); }
-  .m{ background:var(--m); color:var(--light); }
-  .p{ background:var(--p); color:var(--light); }
-  .i{ background:var(--i); color:var(--dark); }
-  .o{ background:var(--o); color:var(--dark); }
-  .n{ background:var(--n); color:var(--dark); }
+:root{
+  --c:#FFD600; --h:#00E676; --a:#FF3D00; --m:#2979FF;
+  --p:#D500F9; --i:#00E5FF; --o:#FF9100; --n:#64DD17;
+  --dark:#121212; --light:#ffffff; --accent:#FFD600;
+}
 
-  /* ----------  RHYME MODAL  ---------- */
-  #rhyme-modal{
-    position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;justify-content:center;align-items:center;
-    z-index:30;opacity:0;pointer-events:none;transition:opacity .4s ease;
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'DM Sans';
+  background:var(--dark);
+  color:var(--light);
+}
+
+/* ---------- TOP CHAMPION BAR ---------- */
+.champion-bar{
+  position:fixed;
+  top:0;left:0;right:0;
+  display:flex;justify-content:center;align-items:center;
+  padding:.6rem 0;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(8px);
+  z-index:20;
+  font-weight:900;
+  font-size:clamp(1.8rem,5vw,3.2rem);
+  letter-spacing:.1em;
+}
+.champion-bar a{
+  text-decoration:none;
+  padding:0 .2em;
+  border-radius:.2em;
+  margin:0 .05em;
+  transition:.3s;
+}
+.champion-bar a:hover{
+  transform:scale(1.15) rotate(-3deg);
+}
+.c{ background:var(--c); color:var(--dark); }
+.h{ background:var(--h); color:var(--dark); }
+.a{ background:var(--a); color:var(--light); }
+.m{ background:var(--m); color:var(--light); }
+.p{ background:var(--p); color:var(--light); }
+.i{ background:var(--i); color:var(--dark); }
+.o{ background:var(--o); color:var(--dark); }
+.n{ background:var(--n); color:var(--dark); }
+
+/* ---------- SLIDE SECTIONS ---------- */
+section{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;
+  padding:2rem 1rem;
+  box-sizing:border-box;
+  position:relative;
+  margin-top:4rem;
+}
+h1{
+  font-size:clamp(8rem,25vw,18rem);
+  font-weight:900;
+  margin:0;
+  line-height:1;
+}
+h1 .rest{
+  font-size:clamp(2rem,8vw,4rem);
+  font-weight:400;
+  margin-left:-.4em;
+}
+p{
+  font-size:clamp(1rem,2.5vw,1.3rem);
+  max-width:700px;
+  margin:0 auto 1.2em;
+  line-height:1.4;
+}
+.cue-box{
+  display:flex;flex-direction:column;align-items:center;
+  margin:1.5rem 0;
+}
+.cue{
+  font-size:clamp(2.2rem,7vw,4rem);
+  font-weight:900;
+  padding:.4em .8em;
+  border-radius:.5em;
+  display:inline-block;
+  margin-bottom:.5em;
+}
+.try{
+  font-size:clamp(1rem,2.5vw,1.2em);
+  opacity:.9;
+}
+.arrow{
+  position:absolute;
+  bottom:1.5rem;
+  left:50%;
+  transform:translateX(-50%);
+  cursor:pointer;
+  transition:.3s;
+}
+.arrow svg{
+  width:40px;height:40px;fill:var(--light);
+}
+.arrow:hover{
+  transform:translateX(-50%) scale(1.2);
+}
+
+/* slide colour blocks */
+#c{background:var(--c);color:var(--dark);} #c .cue{background:var(--dark);color:var(--c);}
+#h{background:var(--h);color:var(--dark);} #h .cue{background:var(--dark);color:var(--h);}
+#a{background:var(--a);color:var(--light);} #a .cue{background:var(--light);color:var(--a);}
+#m{background:var(--m);color:var(--light);} #m .cue{background:var(--light);color:var(--m);}
+#p{background:var(--p);color:var(--light);} #p .cue{background:var(--light);color:var(--p);}
+#i{background:var(--i);color:var(--dark);} #i .cue{background:var(--dark);color:var(--i);}
+#o{background:var(--o);color:var(--dark);} #o .cue{background:var(--dark);color:var(--o);}
+#n{background:var(--n);color:var(--dark);} #n .cue{background:var(--dark);color:var(--n);}
+
+/* ---------- BOTTOM-LEFT AUDIO BUTTONS ---------- */
+.audio-buttons{
+  position:fixed;
+  bottom:1.4rem;
+  left:1.4rem;
+  display:flex;
+  gap:.6rem;
+  z-index:25;
+}
+.audio-btn{
+  background:var(--light);
+  color:var(--dark);
+  border:none;
+  border-radius:999px;
+  padding:.4rem .7rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.2rem;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,.4);
+  opacity:0.92;
+  transition:.25s;
+}
+.audio-btn span.label{
+  font-size:.65rem;
+  font-weight:700;
+  margin-left:.25rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.audio-btn.small{
+  font-size:1rem;
+  padding:.35rem .6rem;
+}
+.audio-btn:hover{
+  transform:translateY(-2px) scale(1.03);
+  opacity:1;
+}
+
+/* ---------- KARAOKE OVERLAY (FULL-SCREEN) ---------- */
+/* full-screen background: soft, light, calm */
+#karaoke-overlay{
+  position:fixed;
+  inset:0;
+  z-index:40;
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,0.9) 0, transparent 55%),
+    linear-gradient(145deg, #f5f7ff 0%, #e4f6ff 40%, #fdf7ff 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .35s ease;
+}
+
+/* keep same “show” behavior */
+#karaoke-overlay.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* card: sharper, liquid-glass version */
+  .karaoke-card{
+    position:relative;
+    max-width:65rem;   /* was 48rem */
+    width:94%;         /* a bit wider on large screens */
+    padding:1.8rem 2.1rem 1.6rem;
+    border-radius:1.6rem;
+    background:linear-gradient(
+      135deg,
+      rgba(255,255,255,0.96),
+      rgba(235,244,255,0.92)
+    );
+    border:1px solid rgba(180,196,230,0.9);
+    backdrop-filter:blur(18px) saturate(120%);
+    box-shadow:
+      0 24px 60px rgba(10,24,56,0.32),
+      0 0 0 1px rgba(255,255,255,0.4) inset;
+    color:#243146;
+    margin: 0 auto;
   }
-  #rhyme-modal.show{opacity:1;pointer-events:auto;}
-  .rhyme-box{
-    background:var(--light);color:var(--dark);padding:2.5rem 3rem;border-radius:1rem;
-    max-width:42rem;width:90%;text-align:center;position:relative;
-    font-family:'Inter',sans-serif;
+
+/* hide header + “lyrics in sync” footer completely */
+.karaoke-header,
+.k-footer{
+  display:none !important;
+}
+
+/* close button: subtle grey, not screaming */
+.karaoke-close{
+  position:absolute;
+  top:.9rem;
+  right:1rem;
+  background:none;
+  border:none;
+  font-size:1.5rem;
+  color:rgba(36,49,70,0.55);
+  cursor:pointer;
+  line-height:1;
+}
+
+/* controls: small, pale pills */
+.karaoke-controls{
+  margin:0 0 .6rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.4rem;
+}
+
+.kbtn{
+  background:rgba(255,255,255,0.0);
+  color:#3c4a62;
+  border-radius:999px;
+  border:1px solid rgba(164,177,204,0.8);
+  padding:.35em .9em;
+  font-size:.75rem;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:.3rem;
+  transition:.2s;
+}
+
+.kbtn.primary{
+  background:rgba(164,177,204,0.18);
+  border-color:rgba(164,177,204,0.9);
+}
+
+.kbtn.secondary{
+  opacity:.9;
+}
+
+.kbtn.secondary.active{
+  border-color:rgba(164,177,204,0.9);
+}
+
+.kbtn:hover{
+  transform:translateY(-1px);
+  background:rgba(164,177,204,0.12);
+}
+
+/* audio bar: just a bit of space */
+#karaoke-audio{
+  width: 80%;
+  max-width: 28rem;
+  margin: 0 auto .8rem;
+  display: block;
+}
+
+/* lyrics area: left-aligned, full-width inside the card */
+#lyrics{
+  max-height: 52vh;
+  overflow-y: auto;
+  margin: .6rem 0 0 0;   /* no horizontal centering */
+  padding: 0;            /* card padding handles the inset */
+  width: 100%;           /* fill the card's inner width */
+}
+
+  /* each line: thin font, lots of breathing room, no bullets */
+
+  /* base lyric line – Poppins, taller, crisper */
+  .k-line{
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+    font-weight: 300;
+    line-height: 1.8;
+    letter-spacing: 0em;
+    margin:.08rem 0;
+    padding:.22rem 0;        /* no left/right padding so text hugs the card padding */
+    color:#8b94aa;
+    background:transparent;
+    border:none;
+    display:block;
+    opacity:0.6;
+    text-align:left;
+    transform-origin:left center;
+    overflow: visible;       /* ensure keyword bubbles are not cropped */
+    transition:
+      opacity .35s ease,
+      color .35s ease,
+      background .35s ease,
+      transform .35s ease,
+      box-shadow .35s ease,
+      font-size .35s ease;
   }
-  .rhyme-box h2{
-    font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin:0 0 1.2em;
+
+  .k-initial{
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 500;
+    margin-right: .15rem;
   }
-  .rhyme-box .line{
-    font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:700;margin:.6em 0;
-    letter-spacing:.02em;
+
+  .k-rest{
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: inherit;
   }
-  .rhyme-box .close-btn{
-    position:absolute;top:1rem;right:1.5rem;background:none;border:none;
-    font-size:2rem;color:var(--dark);cursor:pointer;
+
+  /* hide any dot */
+  .k-line .badge{
+    display:none !important;
   }
-  /* ----------  MAIN CONTENT  ---------- */
-  section{
-    min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
-    text-align:center;padding:2rem 1rem;box-sizing:border-box;position:relative;margin-top:4rem;
+
+
+  /* active line – bolder, liquid-glass band, aligned with left edge */
+  .k-line.active {
+    font-size: clamp(1.2rem, 2.1vw, 1.6rem);  /* slightly smaller so it fits comfortably */
+    font-weight: 500;
+    color: #121525;
+    opacity: 1;
+    background: linear-gradient(120deg, rgba(140,170,255,0.22), rgba(255,255,255,0.98));
+    border-radius: 1rem;
+    padding: 0.45rem 0.35rem;
+    margin: 0.15rem 0;
+    box-shadow: 0 14px 36px rgba(16,34,74,0.28);
+    transform: translateX(0) translateY(-1px);
+    overflow: visible;
+    position: relative;
+    z-index: 10;
+    text-align:left;
   }
-  h1{font-size:clamp(8rem,25vw,18rem);font-weight:900;margin:0;line-height:1;}
-  h1 .rest{font-size:clamp(2rem,8vw,4rem);font-weight:400;margin-left:-.4em;}
-  h2{margin:.3em 0 .6em;font-size:clamp(1.3rem,4vw,2.2rem);font-weight:700;text-transform:uppercase;letter-spacing:.05em;}
-  p{font-size:clamp(1rem,2.5vw,1.3rem);max-width:700px;margin:0 auto 1.2em;line-height:1.4;}
-  .cue-box{display:flex;flex-direction:column;align-items:center;margin:1.5rem 0;}
-  .cue{
-    font-size:clamp(2.2rem,7vw,4rem);font-weight:900;padding:.4em .8em;border-radius:.5em;
-    display:inline-block;margin-bottom:.5em;
+
+/* Optional: Adjust the keyframes for a smoother animation */
+@keyframes soft-glow {
+  0%, 100% { transform: scale(1); }
+  50%     { transform: scale(1.05); }
+}
+  /* base keyword – small bubble even when not active, Poppins */
+  .k-key{
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    display:inline-block;
+    padding:0 .3rem;
+    margin:0 .1rem;
+    border-radius:.7rem;
+    background:rgba(60,106,216,0.08);
+    color:#2b3350;
+    font-weight:500;
+    transform-origin:center;
+    transition:
+      transform .25s ease,
+      background .25s ease,
+      color .25s ease,
+      box-shadow .25s ease,
+      font-size .25s ease;
   }
-  .try{font-size:clamp(1rem,2.5vw,1.2em);opacity:.9;}
-  .arrow{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);cursor:pointer;transition:.3s;}
-  .arrow svg{width:40px;height:40px;fill:var(--light);}
-  .arrow:hover{transform:translateX(-50%) scale(1.2);}
-  /* colours */
-  #c{background:var(--c);color:var(--dark);} #c .cue{background:var(--dark);color:var(--c);}
-  #h{background:var(--h);color:var(--dark);} #h .cue{background:var(--dark);color:var(--h);}
-  #a{background:var(--a);color:var(--light);} #a .cue{background:var(--light);color:var(--a);}
-  #m{background:var(--m);color:var(--light);} #m .cue{background:var(--light);color:var(--m);}
-  #p{background:var(--p);color:var(--light);} #p .cue{background:var(--light);color:var(--p);}
-  #i{background:var(--i);color:var(--dark);} #i .cue{background:var(--dark);color:var(--i);}
-  #o{background:var(--o);color:var(--dark);} #o .cue{background:var(--dark);color:var(--o);}
-  #n{background:var(--n);color:var(--dark);} #n .cue{background:var(--dark);color:var(--n);}
+
+  /* active line: keywords become big, colorful bubbles that pop */
+  .k-line.active .k-key{
+    font-size:1.35em;
+    background:linear-gradient(
+      135deg,
+      #ff9a9e,
+      #fad0c4 30%,
+      #fbc2eb 80%
+    );
+    color:#171822;
+    box-shadow:0 6px 18px rgba(0,0,0,0.18);
+    animation:key-pop 1.6s ease-in-out infinite;
+  }
+
+  /* gentle wave for the active line */
+  .k-line.dance{
+    animation: line-wave 2.4s ease-in-out infinite;
+  }
+
+  @keyframes key-pop{
+    0%   { transform:scale(1); }
+    20%  { transform:scale(1.12) rotate(-1deg); }
+    40%  { transform:scale(1.06); }
+    60%  { transform:scale(1.10) rotate(1deg); }
+    100% { transform:scale(1); }
+  }
+
+  @keyframes line-wave{
+    0%   { transform: translateX(2px); }
+    25%  { transform: translateX(4px); }
+    50%  { transform: translateX(6px); }
+    75%  { transform: translateX(4px); }
+    100% { transform: translateX(2px); }
+  }
+
+  @media (max-width:600px){
+    .karaoke-card{
+      padding:1.4rem 1.2rem 1.2rem;
+      border-radius:1.2rem;
+    }
+    #lyrics{
+      max-height:58vh;
+    }
+  }
 </style>
 </head>
 <body>
 
-<!-- ----------  CHAMPION BAR  ---------- -->
+<!-- TOP BAR -->
 <nav class="champion-bar">
   <a href="#c" class="c">C</a><a href="#h" class="h">H</a><a href="#a" class="a">A</a>
   <a href="#m" class="m">M</a><a href="#p" class="p">P</a><a href="#i" class="i">I</a>
   <a href="#o" class="o">O</a><a href="#n" class="n">N</a>
 </nav>
 
-<!-- ----------  RHYME MODAL  ---------- -->
-<div id="rhyme-modal">
-  <div class="rhyme-box">
-    <button class="close-btn" onclick="this.parentElement.parentElement.classList.remove('show')">&times;</button>
-    <h2>CHAMPION Rhyme</h2>
-    <div class="line">Connect with the judge – nose is the key!</div>
-    <div class="line">Hear the echo, steal their word instantly.</div>
-    <div class="line">Ask an arrow question – hit the target, see?</div>
-    <div class="line">Music in your voice makes partners invent free.</div>
-    <div class="line">Pass the note, point the proof – perfect play, we agree.</div>
-    <div class="line">Invent a save, outline the roadmap – order it nicely.</div>
-    <div class="line">Nice-face wins – that’s CHAMPION, literally!</div>
-  </div>
-</div>
-
-<!-- ----------  MAIN CONTENT  ---------- -->
+<!-- SLIDES -->
 <section id="c">
   <h1>C<span class="rest">onnect</span></h1>
   <div class="cue-box">
     <div class="cue">C-NOSE</div>
     <div class="try">Look at the judge’s nose while you speak → instant connection.</div>
   </div>
-  <div class="arrow" onclick="scrollToNext('h')"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+  <div class="arrow" onclick="scrollToNext('h')">
+    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+  </div>
 </section>
 
 <section id="h">
-  <h1>H<span class="rest">ear</span></h1>
+  <h1>H<span class="rest"> ear</span></h1>
   <div class="cue-box">
     <div class="cue">H-ECHO</div>
     <div class="try">Steal one word they just said and echo it back in your next sentence.</div>
   </div>
-  <div class="arrow" onclick="scrollToNext('a')"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+  <div class="arrow" onclick="scrollToNext('a')">
+    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+  </div>
 </section>
 
 <section id="a">
-  <h1>A<span class="rest">sk</span></h1>
+  <h1>A<span class="rest"> sk</span></h1>
   <div class="cue-box">
     <div class="cue">A-ARROW</div>
     <div class="try">Shoot: “Where’s your proof?” – “How much will it cost?” – “Who measures that?”</div>
   </div>
-  <div class="arrow" onclick="scrollToNext('m')"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+  <div class="arrow" onclick="scrollToNext('m')">
+    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+  </div>
 </section>
 
 <section id="m">
-  <h1>M<span class="rest">usic</span></h1>
+  <h1>M<span class="rest"> usic</span></h1>
   <div class="cue-box">
-    <div class="cue">M-MIX</div>
-    <div class="try">Whisper → Normal → POWER every 30 s; important lines stick.</div>
+    <div class="cue">M-MIX your voice ...</div>
+    <div class="try">Whisper → Normal → POWER every 30s; Important lines stick.</div>
   </div>
-  <div class="arrow" onclick="scrollToNext('p')"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+  <div class="arrow" onclick="scrollToNext('p')">
+    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+  </div>
 </section>
 
 <section id="p">
@@ -149,51 +480,368 @@
     <div class="cue">P-PASS</div>
     <div class="try">Slide ONE sticky note, point to evidence, nod. Pass-Note = perfect play.</div>
   </div>
-  <div class="arrow" onclick="scrollToNext('i')"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+  <div class="arrow" onclick="scrollToNext('i')">
+    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+  </div>
 </section>
 
 <section id="i">
-  <h1>I<span class="rest">nvent</span></h1>
+  <h1>I<span class="rest"> nvent</span></h1>
   <div class="cue-box">
     <div class="cue">I-INVENT</div>
-    <div class="try">Trip up? Say “Fair point, but…” and keep rolling—invent a save.</div>
+    <div class="try">Trip up? Say “They said..., but…” and keep rolling—invent a save.</div>
   </div>
-  <div class="arrow" onclick="scrollToNext('o')"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+  <div class="arrow" onclick="scrollToNext('o')">
+    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+  </div>
 </section>
 
 <section id="o">
   <h1>O<span class="rest">utline</span></h1>
   <div class="cue-box">
-    <div class="cue">O-ORDER</div>
-    <div class="try">Hold up 3 fingers and give the rOad-map: “First… Second… Third…” Judges write what you count.</div>
+    <div class="cue">O-ORDER Your points..</div>
+    <div class="try">Hold up 3 fingers and give the ROAD-map: “First… Second… Third…”</div>
   </div>
-  <div class="arrow" onclick="scrollToNext('n')"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+  <div class="arrow" onclick="scrollToNext('n')">
+    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+  </div>
 </section>
 
 <section id="n">
-  <h1>N<span class="rest">ice</span></h1>
+  <h1>N<span class="rest"> ice</span></h1>
   <div class="cue-box">
     <div class="cue">N-NICE</div>
-    <div class="try">No eye-rolls. Keep your Nice-Face on 😊. Judges give plus points for polite.</div>
+    <div class="try">Keep your Nice-Face on 😊. Judges give plus points for polite.</div>
   </div>
 </section>
 
-<!-- ----------  BUTTON + FUNCTION  ---------- -->
-<button onclick="document.getElementById('rhyme-modal').classList.add('show')"
-        style="position:fixed;bottom:2rem;right:2rem;background:var(--light);color:var(--dark);
-               border:none;border-radius:50%;width:4rem;height:4rem;font-size:2rem;font-weight:900;
-               cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.4);z-index:25;">♫</button>
+<!-- BOTTOM-LEFT BUTTONS TO OPEN KARAOKE -->
+<div class="audio-buttons">
+  <button class="audio-btn" onclick="openKaraoke('long')" title="Play full CHAMPION track">
+    🎵 <span class="label">Long</span>
+  </button>
+  <button class="audio-btn small" onclick="openKaraoke('short')" title="Play short CHAMPION track">
+    ♪ <span class="label">Short</span>
+  </button>
+</div>
+
+<!-- KARAOKE OVERLAY -->
+<div id="karaoke-overlay">
+  <div class="karaoke-card">
+    <button class="karaoke-close" onclick="closeKaraoke()">&times;</button>
+
+    <div class="karaoke-header">
+      <div>
+        <div class="karaoke-title">CHAMPION Karaoke</div>
+        <div class="karaoke-tagline">Debate rhyme · Sing & follow</div>
+      </div>
+      <div class="karaoke-chip">Lyrics in sync</div>
+    </div>
+
+    <audio id="karaoke-audio" controls>
+      <!-- src is set via JS -->
+      Your browser does not support audio.
+    </audio>
+
+    <div class="karaoke-controls">
+      <button id="btn-short" class="kbtn primary" onclick="setVersion('short')">♪ Short</button>
+      <button id="btn-long" class="kbtn secondary" onclick="setVersion('long')">🎵 Long</button>
+      <button class="kbtn secondary" onclick="restartKaraoke()">⟲ Restart &amp; Sync</button>
+    </div>
+
+    <div id="lyrics"></div>
+
+    <div class="k-footer">
+      <div class="k-dot"></div>
+      <div>As the music plays, the current line glows and “dances”.</div>
+    </div>
+  </div>
+</div>
 
 <script>
-  function scrollToNext(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
-  document.addEventListener('keydown',e=>{
-    if(e.key==='ArrowDown'){
-      const sections=['c','h','a','m','p','i','o','n'];
-      const current=sections.find(s=>document.getElementById(s).getBoundingClientRect().top>=-50);
-      const next=sections[sections.indexOf(current)+1];
-      if(next) scrollToNext(next);
+// slide scroll helper
+function scrollToNext(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+document.addEventListener('keydown', e=>{
+  if(e.key==='ArrowDown'){
+    const sections=['c','h','a','m','p','i','o','n'];
+    const current = sections.find(s=>document.getElementById(s).getBoundingClientRect().top>=-50);
+    const next = sections[sections.indexOf(current)+1];
+    if(next) scrollToNext(next);
+  }
+});
+
+/* ---------- KARAOKE LOGIC ---------- */
+
+// lyrics data
+const shortLines = [
+  "{Connect} with the judge – {nose is the key}!",
+  "Hear the echo, {steal their word} instantly.",
+  "Ask an {arrow question} – hit the target, see?",
+  "{Music} in your voice makes partners invent free.",
+  "Pass the {note}, point the proof – perfect play, we agree.",
+  "{Invent a save}, outline the {roadmap} – order it nicely.",
+  "Nice-face wins – that’s CHAMPION, literally!"
+];
+
+const longLines = [
+  "{Connect} with the judge — don’t stare at others or the floor,",
+  "Speak to them, not at your notes — let your message soar!",
+  "Every 30 seconds — {eye contact, please!}",
+  "It says: {“I’m with you, judge,”} and builds expertise.",
+  "And when their focus starts to fade away,",
+  "Say: {“So Judge…”} — it brings them back your way!",
+
+  "Hear the opponent echo, steal their phrase with might,",
+  "{Write their question down} — then answer it tight.",
+  "And if you’re not sure? Say this with precision:",
+  "“Based on our team’s position.”",
+
+  "{Ask the Arrow} question — sharp and lean,",
+  "No rambling detours — just keep it clean.",
+  "{Use cross-exam smart} — it’s your hidden machine.",
+  "Point it at gaps, make your logic seen!",
+
+  "{Music in your voice} — let it rise and fall,",
+  "{Hold your paper chest-high} — not a face-blocking wall.",
+  "{Pause}… after… points… that matter the most,",
+  "It gives time to think — and lets your words boast.",
+
+  "Pass the {sticky note}, whisper the proof — smooth team play,",
+  "{Support} your partner, don’t drift away.",
+  "Nod when they speak, keep your rhythm tight,",
+  "{Two voices, one mind} — you’ll win that fight.",
+
+  "Invent a save — when things go south,",
+  "{Don’t freeze} — let smart words leave your mouth.",
+  "Say: {“They said… but here’s why we still lead…”}",
+  "Or {“I hear that… but here’s what we need.”}",
+  "Make notes as they talk — reframe with grace,",
+  "Turn pressure into your winning case!",
+
+  "Outline your {roadmap} — don’t leave it to chance,",
+  "Say: {“Judge, three things…”} — then give them a stance.",
+  "Be clear, be clean — your final lines,",
+  "Should echo like bells or courtroom chimes.",
+  "Wrap it with heart — confident and just,",
+  "“{That is why, Judge,} you should side with us.”",
+
+  "Nice face wins — so let your warmth shine,",
+  "A calm, kind tone makes your logic divine.",
+  "Don’t snarl, don’t glare — even when you’re right,",
+  "{Charm wins rounds} — more than a fight.",
+
+  "That’s {CHAMPION} — literally!",
+  "Convince the judge, speak fearlessly.",
+  "Respect, rhythm, and unity —",
+  "That’s debate done brilliantly."
+];
+// Times (in seconds) when each line *begins* in the audio.
+// Placeholder values — you will tweak them to match your recording.
+const shortTimeline = [
+  8.2,  // line 0 starts at 0:05.2
+  15.8,  // line 1
+  19.0, // line 2
+  24, // line 3
+  38.0, // line 4
+  49.0, // line 5
+  56.0  // line 6
+];
+
+const longTimeline = [
+8.55,
+11.88,
+15.27,
+18.79,
+23.87,
+28.75,
+36.55,
+40.18,
+43.95,
+54.65,
+60.57,
+63.27,
+66.45,
+69.93,
+73.44,
+76.23,
+84.38,
+88.80,
+95.68,
+98.71,
+100.82,
+103.07,
+105.30,
+107.33,
+112.29,
+115.86,
+118.03,
+122.70,
+125.59,
+133.91,
+137.65,
+141.50,
+145.45,
+149.48,
+159.00,
+162.39,
+165.92,
+169.58,
+173.78,
+177.20,
+180.64,
+185.08
+];
+// which mp3 to use
+const audioSources = {
+  short: "champion-short.mp3", // change to your real short mp3 filename
+  long:  "champion-long.mp3"   // change to your real long mp3 filename
+};
+
+const overlay = document.getElementById('karaoke-overlay');
+const audio = document.getElementById('karaoke-audio');
+const lyricsDiv = document.getElementById('lyrics');
+const btnShort = document.getElementById('btn-short');
+const btnLong = document.getElementById('btn-long');
+
+let currentLines = shortLines;
+let currentVersion = 'short';
+let currentIndex = -1;
+
+// build lyrics into DOM (no special first-letter handling)
+function buildLyrics(lines){
+  lyricsDiv.innerHTML = "";
+
+  lines.forEach((line, i)=>{
+    const div = document.createElement('div');
+    div.className = 'k-line';
+    div.id = `k-line-${i}`;
+
+    // Parse the whole line for {keywords}
+    const regex = /\{([^}]+)\}|([^{}]+)/g;
+    let match;
+    while ((match = regex.exec(line)) !== null) {
+      if (match[1]) {
+        // text inside { } → keyword bubble
+        const keySpan = document.createElement('span');
+        keySpan.className = 'k-key';
+        keySpan.textContent = match[1];
+        div.appendChild(keySpan);
+      } else if (match[2]) {
+        // plain text fragment
+        div.appendChild(document.createTextNode(match[2]));
+      }
     }
+
+    lyricsDiv.appendChild(div);
   });
+
+  currentIndex = -1;
+}
+//open overlay from bottom buttons
+function openKaraoke(version){
+  overlay.classList.add('show');
+  setVersion(version); // this also loads src & plays
+}
+
+// close overlay
+function closeKaraoke(){
+  overlay.classList.remove('show');
+  audio.pause();
+  audio.currentTime = 0;
+  resetHighlight();
+}
+
+// highlight reset
+function resetHighlight(){
+  document.querySelectorAll('.k-line').forEach(l=>{
+    l.classList.remove('active');
+    l.classList.remove('dance');
+  });
+  currentIndex = -1;
+}
+
+// set short/long version
+function setVersion(version){
+  currentVersion = version;
+  currentLines = (version === 'short') ? shortLines : longLines;
+
+  // update button styles
+  if(version === 'short'){
+    btnShort.classList.add('primary');
+    btnShort.classList.remove('secondary');
+    btnLong.classList.add('secondary');
+    btnLong.classList.remove('primary','active');
+  }else{
+    btnLong.classList.add('primary','active');
+    btnLong.classList.remove('secondary');
+    btnShort.classList.add('secondary');
+    btnShort.classList.remove('primary');
+  }
+
+  buildLyrics(currentLines);
+
+  const src = audioSources[version];
+  if(src){
+    audio.src = src;
+    audio.load();
+    audio.currentTime = 0;
+    audio.play();
+  }
+}
+
+// restart button
+function restartKaraoke(){
+  audio.currentTime = 0;
+  audio.play();
+  resetHighlight();
+}
+
+// sync lines while audio plays
+audio.addEventListener('timeupdate', ()=>{
+  if (!audio.duration || !currentLines.length) return;
+
+  const timeline = (currentVersion === 'short') ? shortTimeline : longTimeline;
+  if (!timeline || !timeline.length) return;
+
+  const t = audio.currentTime;
+  let idx = -1;
+
+  for (let i = 0; i < timeline.length; i++) {
+    if (t >= timeline[i]) idx = i;
+    else break;
+  }
+
+  if (idx === -1 || idx === currentIndex) return;
+
+  // clear old
+  document.querySelectorAll('.k-line').forEach(l=>{
+    l.classList.remove('active','dance');
+  });
+
+  const active = document.getElementById(`k-line-${idx}`);
+  if (active) {
+    active.classList.add('active','dance');
+    // 👇 THIS is key for scrolling longer lyrics
+    active.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    });
+  }
+
+  currentIndex = idx;
+});
+audio.addEventListener('ended', ()=>{
+  resetHighlight();
+});
+
+// optional: click outside card closes overlay
+overlay.addEventListener('click', (e)=>{
+  if(e.target === overlay){
+    closeKaraoke();
+  }
+});
 </script>
 </body>
 </html>
